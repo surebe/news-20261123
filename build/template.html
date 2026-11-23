@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Monday 23 November 2026 — The World in One Day</title>
+<style>
+  @page { size: 1024px 1024px; margin: 0; }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { width: 1024px; height: 1024px; }
+  body {
+    font-family: "Liberation Sans", "Noto Sans", sans-serif;
+    background: #f5eedd; color: #191512;
+    overflow: hidden;
+  }
+  .serif { font-family: "Noto Serif", "DejaVu Serif", serif; }
+
+  /* ---- top bar ---- */
+  .topbar {
+    height: 26px; background: #16233f; color: #f5eedd;
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 0 14px; font-size: 10px; font-weight: bold;
+    letter-spacing: 2.5px;
+  }
+  .topbar .right { letter-spacing: 1.2px; font-weight: normal; }
+
+  /* ---- masthead ---- */
+  .mast { padding: 5px 14px 4px; text-align: center; }
+  .mast h1 {
+    font-family: "Noto Serif", "DejaVu Serif", serif;
+    font-weight: 900; font-size: 62px; line-height: 0.98;
+    letter-spacing: -1px; color: #14100c;
+  }
+  .mast .deck {
+    font-family: "Noto Serif", "DejaVu Serif", serif;
+    font-style: italic; font-size: 17.5px; color: #b3271e;
+    margin-top: 5px; font-weight: bold;
+  }
+
+  /* ---- stat band ---- */
+  .stats {
+    display: flex; margin: 0 12px; height: 56px;
+    border-top: 2.5px solid #14100c; border-bottom: 2.5px solid #14100c;
+  }
+  .stat { flex: 1; text-align: center; padding: 4px 4px 2px;
+          border-left: 1px solid #c9bfa9; }
+  .stat:first-child { border-left: none; }
+  .stat-num {
+    font-family: "Noto Serif", "DejaVu Serif", serif;
+    font-weight: 900; font-size: 26px; line-height: 1; color: #b3271e;
+  }
+  .stat-cap { font-size: 8px; line-height: 1.25; margin-top: 2px;
+              white-space: nowrap; overflow: hidden; }
+  .stat-ref { font-size: 7px; font-weight: bold; color: #7a6f5c;
+              letter-spacing: 0.8px; margin-top: 1px; }
+
+  /* ---- region strip ---- */
+  .regions { display: flex; margin: 5px 12px 0; height: 23px; }
+  .region {
+    flex: 1; color: #fff; font-size: 9.5px; font-weight: bold;
+    letter-spacing: 0.6px; display: flex; align-items: center;
+    justify-content: center; margin-left: 2px;
+  }
+  .region:first-child { margin-left: 0; }
+  .region b { font-size: 12px; margin-left: 4px; }
+
+  /* ---- UTC strip ---- */
+  .utc {
+    margin: 5px 12px 0; height: 40px; background: #16233f; color: #fff;
+    display: flex; align-items: stretch; overflow: hidden;
+  }
+  .utc-label {
+    width: 108px; background: #b3271e; color: #fff;
+    font-size: 10.5px; font-weight: bold; letter-spacing: 1px;
+    display: flex; align-items: center; justify-content: center;
+    text-align: center; line-height: 1.2; flex: none;
+  }
+  .utc-grid {
+    flex: 1; display: flex; flex-wrap: wrap; align-content: center;
+    padding: 2px 6px;
+  }
+  .utc-item { width: 16.66%; font-size: 8px; line-height: 1.25;
+              padding: 1px 5px 1px 0; white-space: nowrap;
+              overflow: hidden; }
+  .utc-time { font-weight: bold; color: #f2c14e; }
+  .utc-label-txt { color: #e8e2d2; }
+
+  /* ---- hero cards ---- */
+  .heroes { display: flex; gap: 8px; padding: 7px 12px 0; height: 193px; }
+  .hero { flex: 1; overflow: hidden; }
+  .hero-img { position: relative; height: 80px; overflow: hidden; background: #22304e; }
+  .hero-img img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .kicker {
+    position: absolute; top: 0; left: 0; background: #b3271e; color: #fff;
+    font-size: 10px; font-weight: bold; letter-spacing: 1px;
+    padding: 3px 8px;
+  }
+  .kicker-sm { font-size: 8.5px; padding: 2px 6px; }
+  .hero-chip { position: absolute; right: 5px; bottom: 5px; }
+  .chip {
+    font-size: 7.5px; font-weight: bold; letter-spacing: 0.7px;
+    padding: 2px 5px; border-radius: 2px; white-space: nowrap;
+  }
+  .hero-loc { font-size: 9px; font-weight: bold; color: #b3271e;
+              letter-spacing: 0.4px; margin-top: 4px; white-space: nowrap;
+              overflow: hidden; }
+  .hero-loc b { color: #14100c; }
+  .hero-head {
+    font-family: "Noto Serif", "DejaVu Serif", serif;
+    font-weight: bold; font-size: 17px; line-height: 1.12;
+    height: 38px; overflow: hidden; margin-top: 1px;
+  }
+  .hero-body { font-size: 9.5px; line-height: 1.32; height: 38px;
+               overflow: hidden; margin-top: 2px; }
+  .hero-src { font-size: 8px; color: #7a6f5c; margin-top: 2px; }
+
+  /* ---- small lead cards ---- */
+  .mini-row { display: flex; gap: 8px; padding: 6px 12px 0; height: 119px; }
+  .mini { flex: 1; overflow: hidden; }
+  .mini-img { position: relative; height: 42px; overflow: hidden; background: #22304e; }
+  .mini-img img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .mini-loc { font-size: 8px; font-weight: bold; color: #b3271e;
+              margin-top: 3px; white-space: nowrap; overflow: hidden; }
+  .mini-loc b { color: #14100c; }
+  .mini-head {
+    font-family: "Noto Serif", "DejaVu Serif", serif;
+    font-weight: bold; font-size: 11px; line-height: 1.1;
+    height: 23px; overflow: hidden; margin-top: 1px;
+  }
+  .mini-body { font-size: 8px; line-height: 1.3; height: 21px;
+               overflow: hidden; margin-top: 1px; }
+  .mini-meta { font-size: 8px; margin-top: 2px; }
+  .mini-src { color: #7a6f5c; }
+
+  /* ---- bottom: map + briefs ---- */
+  .bottom { display: flex; gap: 14px; padding: 7px 12px 0; height: 232px; }
+  .map-col { width: 400px; flex: none; }
+  .sec-head {
+    font-size: 10px; font-weight: bold; letter-spacing: 1.2px;
+    border-bottom: 2px solid #14100c; padding-bottom: 3px;
+    display: flex; justify-content: space-between;
+  }
+  .sec-head span { color: #7a6f5c; font-weight: normal; letter-spacing: 0.4px; }
+  .map-wrap { position: relative; margin-top: 5px; background: #16233f; }
+  .map-wrap img { width: 100%; display: block; }
+  .pin {
+    position: absolute; width: 17px; height: 17px; margin: -8.5px 0 0 -8.5px;
+    background: #b3271e; color: #fff; border: 1.5px solid #fff;
+    border-radius: 50%; font-size: 9px; font-weight: bold;
+    display: flex; align-items: center; justify-content: center;
+    line-height: 1;
+  }
+  .legend { font-size: 8px; line-height: 1.45; margin-top: 5px; color: #3a332a; }
+  .legend-item { margin-right: 7px; white-space: nowrap; }
+  .briefs-col { flex: 1; }
+  .briefs-cols { display: flex; gap: 12px; margin-top: 4px; }
+  .briefs-half { flex: 1; }
+  .brief { font-size: 7.8px; line-height: 15px; white-space: nowrap;
+           overflow: hidden; }
+  .brief-num { font-weight: bold; color: #b3271e; }
+  .brief-tag { font-weight: bold; color: #7a6f5c; }
+  .chip-code {
+    font-size: 6.5px; font-weight: bold; padding: 1px 3px;
+    border-radius: 2px;
+  }
+
+  /* ---- date check + footer ---- */
+  .datecheck {
+    margin: 6px 12px 0; height: 34px; border: 2px solid #b3271e;
+    padding: 3px 8px; font-size: 8.5px; line-height: 1.35;
+    overflow: hidden;
+  }
+  .datecheck b { color: #b3271e; letter-spacing: 1px; margin-right: 6px; }
+  .sources { margin: 5px 14px 0; font-size: 7.5px; color: #7a6f5c;
+             line-height: 1.4; }
+  .footer {
+    height: 22px; background: #16233f; color: #f5eedd; margin-top: 6px;
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 0 14px; font-size: 9px; font-weight: bold; letter-spacing: 2px;
+  }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div>THE WORLD IN ONE DAY</div>
+  <div class="right">41 STORIES &middot; 7 REGIONS &middot; <!--PRESS_TIME--></div>
+</div>
+
+<div class="mast">
+  <h1>Monday 23 November 2026</h1>
+  <div class="deck">COP31 collapses &middot; Democrats take 258 seats &middot; 31 tankers wait at Hormuz &middot; Nepal gets $1.62bn</div>
+</div>
+
+<div class="stats"><!--STATS--></div>
+
+<div class="regions"><!--REGIONS--></div>
+
+<div class="utc">
+  <div class="utc-label">THE DAY<br>IN UTC</div>
+  <div class="utc-grid"><!--UTC--></div>
+</div>
+
+<div class="heroes"><!--HEROES--></div>
+<div class="mini-row"><!--MINIS_A--></div>
+<div class="mini-row"><!--MINIS_B--></div>
+
+<div class="bottom">
+  <div class="map-col">
+    <div class="sec-head">WHERE IT HAPPENED <span>pins match story numbers</span></div>
+    <div class="map-wrap">
+      <img src="dotmap.png" alt="World map">
+      <!--PINS-->
+    </div>
+    <div class="legend"><b>CERTAINTY:</b> <!--LEGEND--></div>
+  </div>
+  <div class="briefs-col">
+    <div class="sec-head">ALSO ON MONDAY 23 NOVEMBER <span>27 more stories</span></div>
+    <div class="briefs-cols">
+      <div class="briefs-half"><!--BRIEFS_A--></div>
+      <div class="briefs-half"><!--BRIEFS_B--></div>
+    </div>
+  </div>
+</div>
+
+<div class="datecheck"><b>DATE CHECK</b><!--DATE_CHECK--></div>
+
+<div class="sources">Sources: Reuters, AP, BBC, AFP, The Guardian, Euronews, TradeWinds / Windward, S&amp;P Global, cricket.com.au, Africa CDC. Every story happened or was first reported on Monday 23 November 2026. Pictures: original illustrations made for this page; map drawn in code.</div>
+
+<div class="footer">
+  <div>THE WORLD IN ONE DAY</div>
+  <div>MONDAY 23 NOVEMBER 2026 &middot; ONE PAGE</div>
+</div>
+
+</body>
+</html>
